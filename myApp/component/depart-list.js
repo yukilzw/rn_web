@@ -1,129 +1,156 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
-  Alert,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableHighlight
+    StyleSheet,
+    Text,
+    TextInput,
+    ScrollView,
+    View,
+    Image,
+    TouchableHighlight
 } from 'react-native';
-import {px} from  '../js/Common.js';
+import {px,win_height} from '../js/Common.js';
 
 export default class extends Component{
-  render() {
-    return (
-    <View style={styles.container}>
-          
-      <View style={styles.ul}>
-          <TouchableHighlight underlayColor="#ddd" onPress={() => {
-              Alert.alert(
-              '亲~~:',
-              '呵呵哒',
-            )}
-          }>
-            <View style={[styles.li]}>
-              <Text style={styles.font_hospital}>
-                武汉市中心医院（后湖院区）
-              </Text>
-              <Text style={styles.font_position}>
-                武汉市江汉区姑嫂树路16号
-              </Text>
-              <Image style={styles.li_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
-            </View>
-          </TouchableHighlight>
-          <View style={[styles.li,{borderColor:'transparent'}]}>
-            <Text style={styles.font_hospital}>
-              武汉市中心医院（谌家矶院区）
-            </Text>
-            <Text style={styles.font_position}>
-              湖北省武汉市江岸区
-            </Text>
-            <Image style={styles.li_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
-          </View>
-      </View>
+    state = {
+        doctorName:""
+    }
+    render() {
+        return (
+        <View style={styles.container}>
 
-      <View style={[styles.wrap_2]}>
-        <Text style={styles.font_tip}> 
-          挂号须知
-        </Text>
-        <Text style={styles.font_tip_content}>
-          1、医院采取实名制，所有填写信息必须真实；
-        </Text>
-        <Text style={styles.font_tip_content}>
-          2、挂号后，请在3分钟内进行支付，否则订单失效；
-        </Text>
-        <Text style={styles.font_tip_content}>
-          3、线上挂号，不支持退款。
-        </Text>
-      </View>
-        
-    </View>
-    );
-  }
+            <TouchableHighlight underlayColor="#ddd">
+                <View style={[styles.wrap,styles.wrap_1]}>
+                    <Text style={styles.font_choose_area}>
+                        当前院区：后湖院区
+                    </Text>
+                    <Image style={styles.li_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
+                </View>
+            </TouchableHighlight>
+
+            <View style={[styles.wrap,styles.wrap_2]}>
+                <Image style={styles.search_img} source={require('../img/icon_2.png')} resizeMode='contain'></Image>
+                <TextInput
+                    style={styles.search_input}
+                    placeholder="请输入医生姓名"
+                    onChangeText={(doctorName) => this.setState({doctorName})}
+                    value={this.state.doctorName}
+                    underlineColorAndroid='transparent'
+                />
+            </View>
+
+            <View style={[styles.wrap_content]}>
+                <View style={[styles.wrap_3]}>
+                    <Text style={styles.font_big_depart}>
+                        内科
+                    </Text>
+                    <Text style={styles.font_big_depart}>
+                        内科
+                    </Text>
+                </View>
+                <View style={[styles.wrap_4]}>
+                    <View style={styles.small_depart}>
+                        <Text style={styles.font_small_depart}>内科</Text>
+                        <Image style={styles.tap_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
+                    </View>
+                </View>
+            </View>
+        </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex:1,
-    flexDirection:'row',
-    flexWrap:'wrap',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    backgroundColor: '#f0f0f5'
-  },
-  ul:{
-    borderTopWidth:1,
-    borderBottomWidth:1, 
-    borderColor:"#e6e6e6", 
-    backgroundColor:'#ffffff',
-    marginTop:px(10),
-    width:px(750)
-  },
-  li:{ 
-    alignItems: 'flex-start',
-    flexWrap:'wrap',
-    marginLeft:px(30),
-    borderBottomWidth:1, 
-    borderColor:"#e6e6e6",
-    height:px(160),
-    position:"relative",
-    width:px(750-30)
-  },
-  li_img:{
-    height:px(28),
-    width:px(15),
-    position:"absolute",
-    right:px(30),
-    top:px((160-28)/2)
-  },
-  font_hospital:{
-    lineHeight:px(60),
-    marginTop:px(26),
-    color:"#333",
-    fontSize:px(34)
-  },
-  font_position:{
-    lineHeight:px(44),
-    color:"#838899",
-    fontSize:px(28)
-  },
-  wrap_2:{
-    padding:px(50),
-    paddingTop:px(20)
-  },
-  font_tip:{
-    color:'red',
-    fontSize:px(30),
-    marginBottom:px(18)
-  },
-  font_tip_content:{
-    color:"#838899",
-    fontSize:px(26)
-  }
+    container: {
+        flex:1,
+        flexDirection:'row',
+        flexWrap:'wrap',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        backgroundColor: '#f0f0f5'
+    },
+    wrap:{
+        backgroundColor:"#fff",
+        width:px(750),
+        justifyContent:"center"
+    },
+    wrap_1:{
+        height:px(90),
+        marginBottom:px(10)
+    },
+    font_choose_area:{
+        paddingLeft:px(30),
+        fontSize:px(32),
+        color:"#333333",
+        position:"relative"
+    },
+    li_img:{
+        height:px(28),
+        width:px(15),
+        position:"absolute",
+        right:px(30),
+        top:px((90-28)/2),
+        transform:[{rotate:("90deg")}]
+    },
+    wrap_2:{
+        height:px(100),
+        position:"relative",
+    },
+    search_img:{
+        height:px(34),
+        width:px(34),
+        position:"absolute",
+        left:px(45),
+        top:px((100-34)/2),
+    },
+    search_input:{
+        padding:0, 
+        marginLeft:px(100),
+        fontSize:px(30),
+        width:px(620),
+        color:"#666666"
+    },
+    wrap_content:{
+        flexDirection:'row',
+        width:px(750),
+        position:"absolute",
+        top:px(200),
+        bottom:0,
+        backgroundColor:"blue",
+    },
+    wrap_3:{
+        flex:3,
+        backgroundColor:"#f2f2f2", 
+        width:px(240),
+    },
+    font_big_depart:{
+        textAlign:"center",
+        paddingTop:px(23),
+        height:px(94),
+        fontSize:px(32),
+        color:"#838899",
+        borderBottomWidth:1,
+        borderColor:"#eaecf1",
+    },
+    wrap_4:{
+        flex:4.5,
+        backgroundColor:"#fff",
+        width:px(500),
+    },
+    small_depart:{
+        position:"relative",
+    },
+    font_small_depart:{
+        textAlign:"center",
+        paddingTop:px(21),
+        height:px(90),
+        fontSize:px(32),
+        color:"#838899",
+    },
+    tap_img:{
+        height:px(28),
+        width:px(15),
+        position:"absolute",
+        right:px(30),
+        top:px((90-28)/2),
+    },
 });

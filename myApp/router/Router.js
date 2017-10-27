@@ -12,12 +12,12 @@ import {
 } from 'react-native';
 
 import chooseArea from '../component/choose-area.js';
-import DepartList from '../component/depart-list.js'
+import departList from '../component/depart-list.js'
 
 // 初始化StackNavigator
 export default  MyApp = StackNavigator({
     default_:{
-        screen:chooseArea,
+        screen:departList,
         navigationOptions:{
             headerTitle:"开发测试页面"
         }
@@ -31,7 +31,7 @@ export default  MyApp = StackNavigator({
         }
     },
     Detail_1:{
-        screen:DepartList,
+        screen:departList,
         navigationOptions:{
             headerTitle:"选择科室"
         }

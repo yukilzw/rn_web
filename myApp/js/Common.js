@@ -19,4 +19,4 @@ let scale = 1/pxRatio/design_scale;
 
 let px = px=>win_width*px/designSize.width;
 
-export {px};
+export {px,win_width,win_height};

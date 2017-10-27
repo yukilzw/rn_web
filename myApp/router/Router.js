@@ -3,13 +3,6 @@ import {
     TabNavigator,
     addNavigationHelpers
 } from 'react-navigation';
-import React from 'react';
-import {
-    Image,
-    StyleSheet,
-    Text,
-    AsyncStorage
-} from 'react-native';
 
 import chooseArea from '../component/choose-area.js';
 import departList from '../component/depart-list.js'

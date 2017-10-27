@@ -19,7 +19,7 @@ export default class extends Component{
         <View style={styles.container}>
         <ScrollView>
 
-            <View style={styles.ul}>
+            <View style={styles.ul}> 
                 <TouchableHighlight underlayColor="#ddd" onPress={this.jumpPage.bind(this)}>
                     <View style={[styles.li]}>
                         <Text style={styles.font_hospital}>

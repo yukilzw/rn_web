@@ -12,7 +12,7 @@ export default  MyApp = StackNavigator({
     default_:{
         screen:departList,
         navigationOptions:{
-            headerTitle:"开发测试页面"
+            header:null
         }
     },
     // 将TabNavigator包裹在StackNavigator里面可以保证跳转页面的时候隐藏tabbar
@@ -20,13 +20,13 @@ export default  MyApp = StackNavigator({
     Detail_0:{
         screen:chooseArea,
         navigationOptions:{
-            headerTitle:"选择院区"
+            header:null
         }
     },
     Detail_1:{
         screen:departList,
         navigationOptions:{
-            headerTitle:"选择科室"
+            header:null
         }
     }
 });

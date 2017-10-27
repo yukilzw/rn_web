@@ -101,13 +101,17 @@ const styles = StyleSheet.create({
         position:"absolute",
         left:px(45),
         top:px((100-34)/2),
+        zIndex:1
     },
     search_input:{
         padding:0, 
-        marginLeft:px(100),
+        marginLeft:px(30),
+        paddingLeft:px(80),
         fontSize:px(30),
-        width:px(620),
-        color:"#666666"
+        marginRight:px(30),
+        color:"#666666",
+        borderRadius:px(30),
+        backgroundColor:"#f8f8f8"
     },
     wrap_content:{
         flexDirection:'row',

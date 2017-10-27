@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
         zIndex:1
     },
     search_input:{
+        height:px(60),
         padding:0, 
         marginLeft:px(30),
         paddingLeft:px(80),
@@ -118,8 +119,7 @@ const styles = StyleSheet.create({
         width:px(750),
         position:"absolute",
         top:px(200),
-        bottom:0,
-        backgroundColor:"blue",
+        bottom:0
     },
     wrap_3:{
         flex:3,

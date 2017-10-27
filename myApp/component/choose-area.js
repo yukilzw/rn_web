@@ -31,7 +31,8 @@ export default class extends Component{
                         <Image style={styles.li_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
                     </View>
                 </TouchableHighlight>
-
+            
+                <TouchableHighlight underlayColor="#ddd" onPress={this.jumpPage.bind(this)}>
                 <View style={[styles.li,{borderColor:'transparent'}]}>
                     <Text style={styles.font_hospital}>
                     武汉市中心医院（谌家矶院区）
@@ -41,6 +42,7 @@ export default class extends Component{
                     </Text>
                     <Image style={styles.li_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
                 </View>
+                </TouchableHighlight>
             </View>
 
             <View style={[styles.wrap_2]}>

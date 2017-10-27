@@ -12,20 +12,22 @@ export default  MyApp = StackNavigator({
     default_:{
         screen:chooseArea,
         navigationOptions:{
-            header:null
+            header:null,
         }
     },
     //
     Detail_0:{
         screen:chooseArea,
         navigationOptions:{
-            header:null
+            header:null,
+            gesturesEnabled:true,
         }
     },
     Detail_1:{
         screen:departList,
         navigationOptions:{
-            header:null
+            header:null,
+            gesturesEnabled:true,
         }
     }
 });

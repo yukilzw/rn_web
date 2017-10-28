@@ -10,7 +10,7 @@ import departList from '../component/depart-list.js'
 // 初始化StackNavigator
 export default  MyApp = StackNavigator({
     default_:{
-        screen:departList,
+        screen:chooseArea,
         navigationOptions:{
             header:null,
         }

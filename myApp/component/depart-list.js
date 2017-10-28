@@ -15,6 +15,7 @@ import {px,win_height} from '../js/common.js';
 export default class extends Component{
     state = {
         doctorName:"",
+        chooseWrapShow:false
     }
     constructor(){
         super();
@@ -33,6 +34,7 @@ export default class extends Component{
     }
     changeArea(){
         //this.refs.flatList_1.scrollToEnd()
+        this.setState({chooseWrapShow:!this.state.chooseWrapShow})
     }
     chooseArea(i){
         Alert.alert(
@@ -70,14 +72,14 @@ export default class extends Component{
         return (
         <View style={styles.container}>
             
-            <TouchableHighlight underlayColor="transparent" onPress={this.changeArea.bind(this)}>
+            <TouchableNativeFeedback onPress={this.changeArea.bind(this)}>
                 <View style={[styles.wrap,styles.wrap_1]}>
                     <Text style={styles.font_choose_area}>
                         当前院区：后湖院区
                     </Text>
                     <Image style={styles.li_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
                 </View>
-            </TouchableHighlight>
+            </TouchableNativeFeedback>
 
             <View style={[styles.wrap,styles.wrap_2]}>
                 <Image style={styles.search_img} source={require('../img/icon_2.png')} resizeMode='contain'></Image>
@@ -119,12 +121,12 @@ export default class extends Component{
                         renderItem={({item,index}) => {
                             let bottom = this.state.smallDepart.length-1 == index && styles.list_bottom;
                             return(
-                                <TouchableHighlight underlayColor="transparent" onPress={this.chooseSmallDepart.bind(this,index)}>
+                                <TouchableNativeFeedback onPress={this.chooseSmallDepart.bind(this,index)}>
                                     <View style={[styles.small_depart,bottom]}>
                                         <Text style={styles.font_small_depart}>{item.key+index}</Text>
                                         <Image style={styles.tap_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
                                     </View>
-                                </TouchableHighlight>
+                                </TouchableNativeFeedback>
                             )
                         }}
                         refreshing={false}
@@ -134,7 +136,7 @@ export default class extends Component{
                 </View>
             </View>
 
-            {<ChooseWrap chooseArea={this.chooseArea}/>}
+            {this.state.chooseWrapShow && <ChooseWrap chooseArea={this.chooseArea}/>}
         </View>
         );
     }
@@ -156,7 +158,7 @@ class ChooseWrap extends Component{
                 renderItem={({item,index}) => {
                     return (
                         <TouchableNativeFeedback onPress={this.choose.bind(this,index)}>
-                            <View>
+                            <View style={choose.li_wrap}>
                                 <Text style={choose.li}>{item.key}</Text>
                             </View>
                         </TouchableNativeFeedback>
@@ -177,13 +179,18 @@ const choose = StyleSheet.create({
         width:"100%",
         backgroundColor:"rgba(0,0,0,.6)"
     },
+    li_wrap:{
+        backgroundColor:"#fff",
+    },
     li:{
-        paddingLeft:px(84),
+        marginLeft:px(30),
+        paddingLeft:px(54),
         paddingTop:px(21),
         height:px(90),
         fontSize:px(32),
         color:"#333333",
-        backgroundColor:"#fff",
+        borderTopWidth:1,
+        borderColor:"#eaecf1",
     }
 })
 

@@ -5,7 +5,8 @@ import {
     ScrollView,
     View,
     Image,
-    TouchableHighlight
+    TouchableHighlight,
+    TouchableNativeFeedback
 } from 'react-native';
 import {px} from  '../js/common.js';
 
@@ -20,7 +21,7 @@ export default class extends Component{
         <ScrollView>
 
             <View style={styles.ul}> 
-                <TouchableHighlight underlayColor="#ddd" onPress={this.jumpPage.bind(this)}>
+                <TouchableNativeFeedback onPress={this.jumpPage.bind(this)}>
                     <View style={[styles.li]}>
                         <Text style={styles.font_hospital}>
                         武汉市中心医院（后湖院区）
@@ -30,9 +31,9 @@ export default class extends Component{
                         </Text>
                         <Image style={styles.li_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
                     </View>
-                </TouchableHighlight>
+                </TouchableNativeFeedback>
             
-                <TouchableHighlight underlayColor="#ddd" onPress={this.jumpPage.bind(this)}>
+                <TouchableNativeFeedback onPress={this.jumpPage.bind(this)}>
                 <View style={[styles.li,{borderColor:'transparent'}]}>
                     <Text style={styles.font_hospital}>
                     武汉市中心医院（谌家矶院区）
@@ -42,7 +43,7 @@ export default class extends Component{
                     </Text>
                     <Image style={styles.li_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
                 </View>
-                </TouchableHighlight>
+                </TouchableNativeFeedback>
             </View>
 
             <View style={[styles.wrap_2]}>

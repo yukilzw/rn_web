@@ -1,24 +1,76 @@
 import React, { Component } from 'react';
 import {
     StyleSheet,
+    Alert,
     Text,
     TextInput,
-    ScrollView,
+    FlatList,
     View,
     Image,
-    TouchableHighlight
+    TouchableHighlight,
+    TouchableNativeFeedback,
 } from 'react-native';
-import {px,win_height} from '../js/Common.js';
+import {px,win_height} from '../js/common.js';
 
 export default class extends Component{
     state = {
-        doctorName:""
+        doctorName:"",
     }
+    constructor(){
+        super();
+        let arr = new Array(),
+            arrActive = new Array();
+        for(let i = 0;i<40;i++){
+            arr.push({key: '大科室'});
+            arrActive.push("")
+        }
+        this.state = {
+            ...this.state,
+            bigDepart : arr,
+            bigActive : arrActive,
+            smallDepart : []
+        }
+    }
+    changeArea(){
+        //this.refs.flatList_1.scrollToEnd()
+    }
+    chooseArea(i){
+        Alert.alert(
+            '你爱我对吗？',
+            '头皮发麻，原地爆炸',
+            [
+              {text: '当然了', onPress: () => console.log('当然了')},
+            ]
+        )
+    }
+    chooseBigDepart(i){
+        let arr = this.state.bigActive;
+        arr.forEach((item,i)=>{
+            arr[i] = ""
+        });
+        arr[i] = "active";
+        this.setState({arrActive:arr})
+        //随机小科室
+        let num = Math.floor(Math.random()*16)+5,
+            smallArr = new Array()
+        for(let i = 0;i<num;i++){
+            smallArr.push({key: '小科室'});
+        }
+        this.setState({smallDepart:smallArr})
+    }
+    chooseSmallDepart(i){
+
+    }
+    refreshFlat() {
+        /*this.setState({
+            bigDepart: [{key: '大科室'}]
+        })*/
+    }    
     render() {
         return (
         <View style={styles.container}>
-
-            <TouchableHighlight underlayColor="#ddd">
+            
+            <TouchableHighlight underlayColor="transparent" onPress={this.changeArea.bind(this)}>
                 <View style={[styles.wrap,styles.wrap_1]}>
                     <Text style={styles.font_choose_area}>
                         当前院区：后湖院区
@@ -40,24 +92,100 @@ export default class extends Component{
 
             <View style={[styles.wrap_content]}>
                 <View style={[styles.wrap_3]}>
-                    <Text style={styles.font_big_depart}>
-                        内科
-                    </Text>
-                    <Text style={styles.font_big_depart}>
-                        内科
-                    </Text>
+                    <FlatList
+                        ref="flatList_1"
+                        data={this.state.bigDepart}
+                        renderItem={({item,index}) => {
+                            let act = this.state.bigActive[index] ?　styles.font_big_depart_act : null,
+                                bottom = this.state.bigDepart.length-1 == index && styles.list_bottom;
+                            return(
+                                <TouchableHighlight underlayColor="transparent" onPress={this.chooseBigDepart.bind(this,index)}>
+                                    <View style={[styles.font_big_wrap,bottom]}>
+                                        <Text style={[styles.font_big_depart,act]}>{item.key+index}</Text>
+                                        {act && <Image style={styles.act_img} source={require('../img/icon_3.png')} resizeMode='contain'></Image>}
+                                    </View>
+                                </TouchableHighlight>
+                            )
+                        }}
+                        refreshing={false}
+                        onRefresh={this.refreshFlat.bind(this)}
+                        showsVerticalScrollIndicator={false}
+                    />
                 </View>
                 <View style={[styles.wrap_4]}>
-                    <View style={styles.small_depart}>
-                        <Text style={styles.font_small_depart}>内科</Text>
-                        <Image style={styles.tap_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
-                    </View>
+                    <FlatList
+                        ref="flatList_3"
+                        data={this.state.smallDepart}
+                        renderItem={({item,index}) => {
+                            let bottom = this.state.smallDepart.length-1 == index && styles.list_bottom;
+                            return(
+                                <TouchableHighlight underlayColor="transparent" onPress={this.chooseSmallDepart.bind(this,index)}>
+                                    <View style={[styles.small_depart,bottom]}>
+                                        <Text style={styles.font_small_depart}>{item.key+index}</Text>
+                                        <Image style={styles.tap_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
+                                    </View>
+                                </TouchableHighlight>
+                            )
+                        }}
+                        refreshing={false}
+                        onRefresh={this.refreshFlat.bind(this)}
+                        showsVerticalScrollIndicator={false}
+                    />
                 </View>
             </View>
+
+            {<ChooseWrap chooseArea={this.chooseArea}/>}
         </View>
         );
     }
 }
+
+class ChooseWrap extends Component{
+    state = {
+        area:[{key: '后湖院区'},{key: '谌家矶院区'}]
+    }
+    choose(i){
+        this.props.chooseArea(i)
+    }
+    render() {
+        return (
+        <View style={choose.wrap}>
+            <FlatList
+                ref="flatList_2"
+                data={this.state.area}
+                renderItem={({item,index}) => {
+                    return (
+                        <TouchableNativeFeedback onPress={this.choose.bind(this,index)}>
+                            <View>
+                                <Text style={choose.li}>{item.key}</Text>
+                            </View>
+                        </TouchableNativeFeedback>
+                    )
+                }}
+                showsVerticalScrollIndicator={false}
+            />
+        </View>
+        )
+    }
+}
+
+const choose = StyleSheet.create({
+    wrap:{
+        position:"absolute",
+        top:px(90),
+        bottom:0,
+        width:"100%",
+        backgroundColor:"rgba(0,0,0,.6)"
+    },
+    li:{
+        paddingLeft:px(84),
+        paddingTop:px(21),
+        height:px(90),
+        fontSize:px(32),
+        color:"#333333",
+        backgroundColor:"#fff",
+    }
+})
 
 const styles = StyleSheet.create({
     container: {
@@ -126,14 +254,32 @@ const styles = StyleSheet.create({
         backgroundColor:"#f2f2f2", 
         width:px(240),
     },
+    list_bottom:{
+        marginBottom:px(200),
+    },
+    font_big_wrap:{
+        position:"relative"
+    },
     font_big_depart:{
-        textAlign:"center",
+        paddingLeft:px(55),
         paddingTop:px(23),
         height:px(94),
         fontSize:px(32),
         color:"#838899",
         borderBottomWidth:1,
         borderColor:"#eaecf1",
+    },
+    font_big_depart_act:{
+        backgroundColor:"#fff",
+        borderBottomWidth:0
+    },
+    act_img:{
+        height:px(14),
+        width:px(9),
+        position:"absolute",
+        left:px(30),
+        top:px((94-14)/2),
+        zIndex:1
     },
     wrap_4:{
         flex:4.5,

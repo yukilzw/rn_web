@@ -7,7 +7,7 @@ import {
     Image,
     TouchableHighlight
 } from 'react-native';
-import {px} from  '../js/Common.js';
+import {px} from  '../js/common.js';
 
 export default class extends Component{
     jumpPage(){

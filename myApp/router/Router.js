@@ -1,3 +1,5 @@
+import React from 'react';
+import { connect } from 'react-redux';
 import {
     StackNavigator,
     TabNavigator,
@@ -8,9 +10,9 @@ import chooseArea from '../component/choose-area.js';
 import departList from '../component/depart-list.js'
 
 // 初始化StackNavigator
-export default  MyApp = StackNavigator({
+const MyApp = StackNavigator({
     default_:{
-        screen:chooseArea,
+        screen:departList,
         navigationOptions:{
             header:null,
         }
@@ -31,3 +33,13 @@ export default  MyApp = StackNavigator({
         }
     }
 });
+
+/*const AppWithNavigationState = ({ dispatch }) => (
+     <MyApp navigation={addNavigationHelpers({ dispatch })}/>
+);*/
+
+const mapStateToProps = state => {
+    return state
+};
+
+export default connect(mapStateToProps)(MyApp);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+    NativeModules,
     StyleSheet,
     Alert,
     Text,
@@ -7,12 +8,21 @@ import {
     FlatList,
     View,
     Image,
+    LayoutAnimation,
+    Animated,
+    Easing,
     TouchableHighlight,
-    TouchableNativeFeedback,
+    TouchableWithoutFeedback
 } from 'react-native';
+import { connect } from 'react-redux';
+import * as Action from '../store/action'
 import {px,win_height} from '../js/common.js';
 
-export default class extends Component{
+const { UIManager } = NativeModules;
+UIManager.setLayoutAnimationEnabledExperimental &&
+UIManager.setLayoutAnimationEnabledExperimental(true);
+
+class Main extends Component{
     state = {
         doctorName:"",
         chooseWrapShow:false
@@ -39,7 +49,7 @@ export default class extends Component{
     chooseArea(i){
         Alert.alert(
             '你爱我对吗？',
-            '头皮发麻，原地爆炸',
+            '你说呢',
             [
               {text: '当然了', onPress: () => console.log('当然了')},
             ]
@@ -72,14 +82,14 @@ export default class extends Component{
         return (
         <View style={styles.container}>
             
-            <TouchableNativeFeedback onPress={this.changeArea.bind(this)}>
+            <TouchableWithoutFeedback onPress={this.changeArea.bind(this)}>
                 <View style={[styles.wrap,styles.wrap_1]}>
                     <Text style={styles.font_choose_area}>
                         当前院区：后湖院区
                     </Text>
                     <Image style={styles.li_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
                 </View>
-            </TouchableNativeFeedback>
+            </TouchableWithoutFeedback>
 
             <View style={[styles.wrap,styles.wrap_2]}>
                 <Image style={styles.search_img} source={require('../img/icon_2.png')} resizeMode='contain'></Image>
@@ -97,16 +107,17 @@ export default class extends Component{
                     <FlatList
                         ref="flatList_1"
                         data={this.state.bigDepart}
+                        keyExtractor={()=>Math.random()}
                         renderItem={({item,index}) => {
                             let act = this.state.bigActive[index] ?　styles.font_big_depart_act : null,
                                 bottom = this.state.bigDepart.length-1 == index && styles.list_bottom;
                             return(
-                                <TouchableHighlight underlayColor="transparent" onPress={this.chooseBigDepart.bind(this,index)}>
+                                <TouchableWithoutFeedback onPress={this.chooseBigDepart.bind(this,index)}>
                                     <View style={[styles.font_big_wrap,bottom]}>
                                         <Text style={[styles.font_big_depart,act]}>{item.key+index}</Text>
                                         {act && <Image style={styles.act_img} source={require('../img/icon_3.png')} resizeMode='contain'></Image>}
                                     </View>
-                                </TouchableHighlight>
+                                </TouchableWithoutFeedback>
                             )
                         }}
                         refreshing={false}
@@ -118,58 +129,137 @@ export default class extends Component{
                     <FlatList
                         ref="flatList_3"
                         data={this.state.smallDepart}
+                        keyExtractor={()=>Math.random()}
                         renderItem={({item,index}) => {
                             let bottom = this.state.smallDepart.length-1 == index && styles.list_bottom;
                             return(
-                                <TouchableNativeFeedback onPress={this.chooseSmallDepart.bind(this,index)}>
+                                <TouchableWithoutFeedback onPress={this.chooseSmallDepart.bind(this,index)}>
                                     <View style={[styles.small_depart,bottom]}>
                                         <Text style={styles.font_small_depart}>{item.key+index}</Text>
                                         <Image style={styles.tap_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
                                     </View>
-                                </TouchableNativeFeedback>
+                                </TouchableWithoutFeedback>
                             )
                         }}
                         refreshing={false}
                         onRefresh={this.refreshFlat.bind(this)}
-                        showsVerticalScrollIndicator={false}
+                        showsVerticalScrollIndicator={false} 
                     />
                 </View>
             </View>
-
+            
             {this.state.chooseWrapShow && <ChooseWrap chooseArea={this.chooseArea}/>}
+
         </View>
         );
     }
 }
 
+
+export default connect(state => state)(Main)
+
 class ChooseWrap extends Component{
     state = {
-        area:[{key: '后湖院区'},{key: '谌家矶院区'}]
+        area:[{key: '后湖院区'},{key: '谌家矶院区'}],
     }
     choose(i){
         this.props.chooseArea(i)
     }
     render() {
         return (
-        <View style={choose.wrap}>
+        
+        <ChooseWrapAnim style={[choose.wrap]} type="1">
+            <ChooseWrapAnim type="2">
             <FlatList
                 ref="flatList_2"
                 data={this.state.area}
+                keyExtractor={()=>Math.random()}
                 renderItem={({item,index}) => {
                     return (
-                        <TouchableNativeFeedback onPress={this.choose.bind(this,index)}>
+                        <TouchableWithoutFeedback onPress={this.choose.bind(this,index)}>
                             <View style={choose.li_wrap}>
                                 <Text style={choose.li}>{item.key}</Text>
                             </View>
-                        </TouchableNativeFeedback>
+                        </TouchableWithoutFeedback>
                     )
                 }}
                 showsVerticalScrollIndicator={false}
             />
-        </View>
+            </ChooseWrapAnim>
+        </ChooseWrapAnim>
+
         )
     }
 }
+
+class ChooseWrapAnim extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        fadeAnim: new Animated.Value(0),
+        fadeAnim2: new Animated.Value(0),
+      };
+    }
+    componentWillUnmount() {
+        LayoutAnimation.configureNext({
+            duration: 200, 
+            delete: { 
+                type: LayoutAnimation.Types.easeInEaseOut,
+                property: LayoutAnimation.Properties.opacity,
+            },
+          });
+    }
+    componentDidMount() {
+      Animated.timing(
+        this.state.fadeAnim,
+        {
+          toValue: 1,
+          duration: 1000,
+          easing: Easing.elastic(4)
+        }
+      ).start();
+      Animated.timing(
+        this.state.fadeAnim2,
+        {
+          toValue: 1,
+          duration: 250,
+        }
+      ).start();                                  
+    }
+    render() {
+      let animateStyle;
+      switch(this.props.type){
+        case "1":
+        animateStyle = {
+            backgroundColor:this.state.fadeAnim2.interpolate({
+                inputRange: [0,1],
+                outputRange: ['rgba(0,0,0,0)', 'rgba(0,0,0,.6)']
+            })
+        }
+        break;
+        case "2":
+        animateStyle = {
+            transform: [{
+                translateY: this.state.fadeAnim.interpolate({
+                    inputRange: [0,1],
+                    outputRange: [-px(180), 0 ]
+                })
+            }]
+        } 
+        break;
+      }
+      return (
+        <Animated.View                           
+          style={[
+            ...(this.props.style || {}),
+            animateStyle         
+          ]}
+        >
+          {this.props.children}
+        </Animated.View>
+      );
+    }
+  }
 
 const choose = StyleSheet.create({
     wrap:{
@@ -177,7 +267,6 @@ const choose = StyleSheet.create({
         top:px(90),
         bottom:0,
         width:"100%",
-        backgroundColor:"rgba(0,0,0,.6)"
     },
     li_wrap:{
         backgroundColor:"#fff",

@@ -5,6 +5,7 @@ import {
     ScrollView,
     View,
     Image,
+    Animated,
     TouchableHighlight,
     TouchableNativeFeedback
 } from 'react-native';

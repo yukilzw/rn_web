@@ -11,7 +11,6 @@ const hos_name = (state="left", action) => {
     }
 }
 
-//取决于这里你加入了多少 reducer
 export default RootReducer = combineReducers({
     hos_name
 });

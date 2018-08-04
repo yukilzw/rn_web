@@ -7,13 +7,10 @@ import Reducer from './myApp/store/reducer';
 
 import App from './myApp/router/router.js';
 
-let middlewares = [];
-middlewares.push(thunk);
+let middlewares = [thunk];
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const store = ((initialState)=>{
-    return createStoreWithMiddleware(Reducer,initialState);
-})()
+const createStoreWithMiddleware = applyMiddleware(...middlewares);
+const store = createStore(Reducer, {}, createStoreWithMiddleware);
 
 export default class extends Component {
     render() {

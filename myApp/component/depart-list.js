@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as Action from '../store/action'
-import {px,win_height} from '../js/common.js';
+import { px, win_height } from '../js/common.js';
 
 const { UIManager } = NativeModules;
 UIManager.setLayoutAnimationEnabledExperimental &&

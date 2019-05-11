@@ -1,16 +1,18 @@
 import { combineReducers } from 'redux';
 
-const hos_name = (state="left", action) => {
+const hos_name = (state = 'left', action) => {
     switch (action.type) {
         case 'left':
-            return "left"
+            return 'left';
         case 'right':
-            return "right"
+            return 'right';
         default :
-            return state
+            return state;
     }
-}
+};
 
-export default RootReducer = combineReducers({
+const RootReducer = combineReducers({
     hos_name
 });
+
+export default RootReducer;

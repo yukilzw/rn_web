@@ -1,4 +1,4 @@
-package com.awesomeproject;
+package com.princenative;
 
 import android.app.Application;
 

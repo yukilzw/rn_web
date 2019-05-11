@@ -1,5 +1,3 @@
-export const change = () => {
-    return {
-        type:'right'
-    }
-}
+export const change = () => ({
+    type: 'right'
+});

@@ -1,37 +1,11 @@
 import { connect } from 'react-redux';
 import {
-    StackNavigator,
-    TabNavigator,
-    addNavigationHelpers
+    StackNavigator
 } from 'react-navigation';
 
-import chooseArea from '../component/choose-area.js';
-import departList from '../component/depart-list.js';
+import routes from './config';
 
-// 初始化StackNavigator
-const MyApp = StackNavigator({
-    default_: {
-        screen: chooseArea,
-        navigationOptions: {
-            header: null
-        }
-    },
-    //
-    Detail_0: {
-        screen: chooseArea,
-        navigationOptions: {
-            header: null,
-            gesturesEnabled: true
-        }
-    },
-    Detail_1: {
-        screen: departList,
-        navigationOptions: {
-            header: null,
-            gesturesEnabled: true
-        }
-    }
-});
+const MyApp = StackNavigator(routes);
 
 /* const AppWithNavigationState = ({ dispatch }) => (
      <MyApp navigation={addNavigationHelpers({ dispatch })}/>

@@ -114,7 +114,6 @@ class ChooseWrap extends Component {
                 <FlatList
                     ref="flatList_2"
                     data={this.state.area}
-                    keyExtractor={() => Math.random()}
                     renderItem={({ item, index }) =>
                         <TouchableWithoutFeedback onPress={this.choose.bind(this, index)}>
                             <View style={choose.li_wrap}>
@@ -156,10 +155,10 @@ class Main extends Component {
     chooseArea(i) {
         Alert.alert(
             'Prince Tips',
-            '确定不后悔？',
+            '确定吗老铁？',
             [
                 {
-                    text: 'Yes I do',
+                    text: 'Yes',
                     onPress() {
                         console.log('当然了');
                     }
@@ -173,7 +172,7 @@ class Main extends Component {
         const smallArr = [];
 
         for (let i = 0; i < num; i++) {
-            smallArr.push({ key: '小科室' });
+            smallArr.push({ key: '小科室' + i });
         }
         this.setState({ smallDepart: smallArr });
     }
@@ -181,7 +180,6 @@ class Main extends Component {
         this.setState({ webViewIsShow: true });
     }
     closeWebView() {
-        console.log('丝袜');
         this.setState({ webViewIsShow: false });
     }
     refreshFlat() {
@@ -218,7 +216,6 @@ class Main extends Component {
                         <FlatList
                             ref="flatList_1"
                             data={this.state.bigDepart}
-                            keyExtractor={() => Math.random()}
                             renderItem={({ item, index }) => {
                                 const act = this.state.bigActive === index ? styles.font_big_depart_act : null;
                                 const bottom = this.state.bigDepart.length - 1 === index && styles.list_bottom;
@@ -241,14 +238,13 @@ class Main extends Component {
                         <FlatList
                             ref="flatList_3"
                             data={this.state.smallDepart}
-                            keyExtractor={() => Math.random()}
                             renderItem={({ item, index }) => {
                                 const bottom = this.state.smallDepart.length - 1 === index && styles.list_bottom;
 
                                 return (
                                     <TouchableWithoutFeedback onPress={this.chooseSmallDepart.bind(this, index)}>
                                         <View style={[styles.small_depart, bottom]}>
-                                            <Text style={styles.font_small_depart}>{item.key + index}</Text>
+                                            <Text style={styles.font_small_depart}>{item.key}</Text>
                                             <Image style={styles.tap_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
                                         </View>
                                     </TouchableWithoutFeedback>
@@ -267,7 +263,7 @@ class Main extends Component {
                     <View style={[styles.webViewClose]} onTouchStart={this.closeWebView.bind(this)}></View>
                     <View style={[styles.webViewWrap2]}>
                         <WebView
-                            source={{ uri: 'https://h5.m.taobao.com/' }}
+                            source={{ uri: 'https://m.douyu.com/' }}
                         />
                     </View>
                 </View> : null}
@@ -305,7 +301,7 @@ const choose = StyleSheet.create({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
+        flexDirection: 'column',
         flexWrap: 'wrap',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',

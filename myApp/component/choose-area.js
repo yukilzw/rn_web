@@ -5,7 +5,8 @@ import {
     ScrollView,
     View,
     Image,
-    TouchableNativeFeedback
+    TouchableNativeFeedback,
+    TouchableWithoutFeedback
 } from 'react-native';
 import { px } from  '../js/common.js';
 
@@ -21,7 +22,7 @@ export default class extends Component {
                 <ScrollView>
 
                     <View style={styles.ul}>
-                        <TouchableNativeFeedback onPress={this.jumpPage.bind(this)}>
+                        <TouchableWithoutFeedback onPress={this.jumpPage.bind(this)}>
                             <View style={[styles.li]}>
                                 <Text style={styles.font_hospital}>
                                 武汉市中心医院（后湖院区）
@@ -31,7 +32,7 @@ export default class extends Component {
                                 </Text>
                                 <Image style={styles.li_img} source={require('../img/icon_1.png')} resizeMode='contain'></Image>
                             </View>
-                        </TouchableNativeFeedback>
+                        </TouchableWithoutFeedback>
 
                         <TouchableNativeFeedback onPress={this.jumpPage.bind(this)}>
                             <View style={[styles.li, { borderColor: 'transparent' }]}>

@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import Reducer from './myApp/store/reducer';
 
-import App from './myApp/router/router.js';
+import App from './myApp/router/router';
 
 let middlewares = [thunk];
 

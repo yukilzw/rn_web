@@ -1,14 +1,16 @@
 {
-  "name": "PrinceNative",
-  "version": "0.0.1",
+  "name": "rn_web",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "web": "webpack-dev-server"
   },
   "dependencies": {
     "react": "16.8.3",
-    "react-native": "0.59.0",
+    "react-dom": "16.8.3",
+    "react-native": "0.58.3",
     "react-navigation": "2.11.2",
     "react-redux": "5.0.7",
     "redux": "4.0.0",
@@ -19,11 +21,21 @@
     "@babel/runtime": "7.4.4",
     "babel-jest": "24.7.1",
     "jest": "24.7.1",
-    "metro-react-native-babel-preset": "0.54.0",
     "react-test-renderer": "16.8.3",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.9.0",
-    "eslint-plugin-react": "^7.11.1"
+    "babel-eslint": "10.0.1",
+    "eslint": "5.16.0",
+    "eslint-plugin-react": "7.13.0",
+    "metro-react-native-babel-preset": "0.54.0",
+    "@babel/plugin-transform-runtime": "7.4.4",
+    "react-native-web": "0.11.4",
+    "babel-plugin-react-native-web": "0.11.4",
+    "file-loader": "3.0.1",
+    "webpack": "4.32.3",
+    "webpack-dev-server": "3.5.1",
+    "webpack-cli": "3.3.2",
+    "babel-loader": "8.0.6",
+    "@react-navigation/core": "3.4.2",
+    "@react-navigation/web": "1.0.0-alpha.8"
   },
   "jest": {
     "preset": "react-native"

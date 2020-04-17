@@ -1,5 +1,5 @@
 {
-    "parser": "babel-eslint",
+    "parser": "@typescript-eslint/parser",
     "env": {
         "browser": true,
         "node": true,
@@ -25,12 +25,14 @@
         }
     },
     "plugins": [
-        "react"
+        "@typescript-eslint", "react"
     ],
     "globals": {
-        "PWA": true,
+        "MOCK_PATH": true,
         "SOCKET_HOST": true,
-        "REQUEST_HOST": true
+        "REQUEST_HOST": true,
+        "DEBUG": true,
+        "object": true
     },
     "rules": {
         ////////////////
@@ -154,7 +156,7 @@
         // 禁用 eval()
         "no-eval": 2,
         // 禁止扩展原生类型
-        "no-extend-native": 2,
+        "no-extend-native": 0,
         // 禁止不必要的 .bind() 调用
         "no-extra-bind": 2,
         // 禁用不必要的标签
@@ -288,7 +290,7 @@
         // 要求 require() 出现在顶层模块作用域中
         "global-require": 1,
         // 要求回调函数中有容错处理
-        "handle-callback-err": [2, "^(err|error)$"],
+        "handle-callback-err": [0, "^(err|error)$"],
         // 禁止混合常规 var 声明和 require 调用
         "no-mixed-requires": 0,
         // 禁止调用 require 时使用 new 操作符
@@ -316,7 +318,7 @@
             "allowSingleLine": true
         }],
         // 双峰驼命名格式
-        "camelcase": 1,
+        "camelcase": 0,
         // 控制逗号前后的空格
         "comma-spacing": [2, {
             "before": false,
@@ -355,7 +357,7 @@
         // allowArrowFunctions: declaration风格中允许箭头函数。 e.g [2, "declaration", { "allowArrowFunctions": true }]
         "func-style": 0,
         // 强制回调函数最大嵌套深度 5层
-        "max-nested-callbacks": [1, 5],
+        "max-nested-callbacks": [0, 5],
         // 禁止使用指定的标识符
         "id-blacklist": 0,
         // 强制标识符的最新和最大长度
@@ -377,7 +379,7 @@
         // 强制每一行中所允许的最大语句数量
         "max-statements-per-line": 0,
         // 要求构造函数首字母大写 （要求调用 new 操作符时有首字母大小的函数，允许调用首字母大写的函数时没有 new 操作符。）
-        "new-cap": [2, {
+        "new-cap": [0, {
             "newIsCap": true,
             "capIsNew": false
         }],
@@ -392,7 +394,7 @@
         // 要求 return 语句之前有一空行
         "newline-before-return": 0,
         // 要求方法链中每个调用都有一个换行符
-        "newline-per-chained-call": 1,
+        "newline-per-chained-call": 0,
         // 禁用 continue 语句
         "no-continue": 0,
         // 禁止在代码行后使用内联注释

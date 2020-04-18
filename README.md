@@ -225,9 +225,9 @@ export default connect(mapStateToProps)(MyApp);
 
 ##### 8. 效果展示
 - Native:
-![native-0](https://user-gold-cdn.xitu.io/2020/4/18/1718c2f9ff901394?w=1240&h=2549&f=jpeg&s=134700)
-![native-1](https://user-gold-cdn.xitu.io/2020/4/18/1718c2f9ff61cef0?w=1240&h=2549&f=jpeg&s=180176)
-![native-2](https://user-gold-cdn.xitu.io/2020/4/18/1718c2f9fff1a424?w=1240&h=2549&f=jpeg&s=279633)
+![native-0](https://user-gold-cdn.xitu.io/2020/4/18/1718c2f9ff901394?w=620&h=1275&f=jpeg&s=134700)
+![native-1](https://user-gold-cdn.xitu.io/2020/4/18/1718c2f9ff61cef0?w=620&h=1275&f=jpeg&s=180176)
+![native-2](https://user-gold-cdn.xitu.io/2020/4/18/1718c2f9fff1a424?w=620&h=1275&f=jpeg&s=279633)
 
 - H5
 ![H5-0](https://user-gold-cdn.xitu.io/2020/4/18/1718c2f9ff6384fd?w=514&h=901&f=png&s=41745)
